@@ -1,55 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import pic1 from "../../media/home_library.jpeg";
+import pic2 from "../../media/dream_library.jpeg";
+import pic3 from "../../media/endless_books.jpeg";
 
 const BookCarousel = () => {
-  const [books, setBooks] = useState([]);
-
-  // Example ISBNs
-  const bookISBNs = ["9781637632116", "9781950129362", "9781781100486"];
-
-  useEffect(() => {
-    const fetchBooks = async () => {
-      const promises = bookISBNs.map((isbn) =>
-        fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`
-        ).then((res) => res.json())
-      );
-
-      const results = await Promise.all(promises);
-
-      const booksData = results
-        .map((result) => {
-          const volumeInfo = result.items?.[0]?.volumeInfo;
-          if (!volumeInfo) return null;
-
-          // Use the widest available cover image
-          const imageLinks = volumeInfo.imageLinks || {};
-          const coverUrl =
-            imageLinks.extraLarge ||
-            imageLinks.large ||
-            imageLinks.medium ||
-            imageLinks.thumbnail ||
-            imageLinks.smallThumbnail ||
-            null;
-
-          return {
-            title: volumeInfo.title || "No Title",
-            coverUrl,
-          };
-        })
-        .filter((book) => book && book.coverUrl);
-
-      setBooks(booksData);
-    };
-
-    fetchBooks();
-  }, []);
-
-  if (books.length === 0) return <p className="mt-4 text-center">Loading...</p>;
+  // Static list of books
+  const books = [
+    {
+      title: "Enjoy books anywhere, anytime",
+      coverUrl: pic1,
+    },
+    {
+      title: "Convenient access to knowledge at all times",
+      coverUrl: pic2,
+    },
+    {
+      title: "Over 1000+ books available",
+      coverUrl: pic3,
+    },
+  ];
 
   return (
     <div
-      id="googleBooksCarousel"
-      className="carousel slide w-50 mx-auto mt-4"
+      id="bookCarousel"
+      className="carousel slide w-100 mx-auto"
       data-bs-ride="carousel"
     >
       <div className="carousel-inner">
@@ -62,7 +36,7 @@ const BookCarousel = () => {
               src={coverUrl}
               className="d-block w-100"
               alt={`Cover of ${title}`}
-              style={{ maxHeight: "300px", objectFit: "cover" }}
+              style={{ maxHeight: "350px", objectFit: "cover" }}
             />
             <div className="carousel-caption d-none d-md-block">
               <h5>{title}</h5>
@@ -74,20 +48,20 @@ const BookCarousel = () => {
       <button
         className="carousel-control-prev"
         type="button"
-        data-bs-target="#googleBooksCarousel"
+        data-bs-target="#bookCarousel"
         data-bs-slide="prev"
       >
-        <span className="carousel-control-prev-icon" aria-hidden="true" />
+        <span className="fa fa-step-backward" aria-hidden="true" />
         <span className="visually-hidden">Previous</span>
       </button>
 
       <button
         className="carousel-control-next"
         type="button"
-        data-bs-target="#googleBooksCarousel"
+        data-bs-target="#bookCarousel"
         data-bs-slide="next"
       >
-        <span className="carousel-control-next-icon" aria-hidden="true" />
+        <span className="fa fa-step-forward" aria-hidden="true" />
         <span className="visually-hidden">Next</span>
       </button>
     </div>
