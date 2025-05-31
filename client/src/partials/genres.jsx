@@ -33,7 +33,9 @@ const Genres = () => {
                 coverUrl: book?.cover_id
                   ? `https://covers.openlibrary.org/b/id/${book.cover_id}-L.jpg`
                   : "https://via.placeholder.com/150",
-                author: book?.author_name?.join(", ") || "Unknown",
+                author:
+                  book?.authors.map((author) => author.name).join(", ") ||
+                  "Unknown",
                 downloadLink: `https://openlibrary.org${book?.key}`,
               }));
 

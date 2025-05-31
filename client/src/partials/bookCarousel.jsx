@@ -23,7 +23,7 @@ const BookCarousel = () => {
   return (
     <div
       id="bookCarousel"
-      className="carousel slide w-100 mx-auto"
+      className="carousel slide col-12 mx-auto"
       data-bs-ride="carousel"
     >
       <div className="carousel-inner">
@@ -38,7 +38,7 @@ const BookCarousel = () => {
               alt={`Cover of ${title}`}
               style={{ maxHeight: "350px", objectFit: "cover" }}
             />
-            <div className="carousel-caption d-none d-md-block">
+            <div className="carousel-caption">
               <h5>{title}</h5>
             </div>
           </div>
