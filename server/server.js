@@ -40,7 +40,7 @@ con.connect(function (err) {
 
 app.get("/profile", (req, res) => {
   if (!req.session.user) {
-    return res.status(401).send({ user: "" });
+    return res.send({ user: "" });
   } else {
     return res.send({ user: req.session.user });
   }
@@ -48,7 +48,7 @@ app.get("/profile", (req, res) => {
 
 app.get("/signout", (req, res) => {
   req.session.destroy((err) => {
-    if (err) return res.status(500).send({ status: "failed" });
+    if (err) return res.send({ status: "failed" });
     res.send({ status: "success" });
   });
 });
@@ -70,7 +70,6 @@ app.post("/login", (req, res) => {
   const values = [req.body.email, req.body.password];
   con.query(sql, values[0], (err, result) => {
     if (err) return res.json({ message: "Something went wrong" });
-
     if (result[0].email && atob(result[0].password) == values[1]) {
       req.session.user = result[0].username;
       return res.json({ success: true });

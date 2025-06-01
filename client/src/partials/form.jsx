@@ -35,7 +35,6 @@ const Form = (props) => {
           .post("/api/sign_up", values)
           .then((res) => {
             navigate("/");
-            console.log(res);
           })
           .catch((err) => console.log(err));
       } else {
