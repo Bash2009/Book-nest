@@ -24,7 +24,7 @@ const SubHead = () => {
     <>
       <div className="row p-3">
         <p className="fs-4 col-10 col-md-11 m-0">
-          Welcome<span className="d-none d-md-inline-block"> to the nest</span>
+          Welcome <span className="d-none d-md-inline-block"> to the nest</span>
           {user != "" && ", " + user}
         </p>
 

@@ -25,6 +25,7 @@ const Form = (props) => {
     if (props.type == "Sign up") {
       if (values.password !== values.con_password) {
         setReady(false);
+        alert("Input the same passwords");
       } else {
         setReady(true);
       }

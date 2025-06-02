@@ -60,8 +60,7 @@ app.post("/sign_up", (req, res) => {
     if (err) return res.json({ message: "Something went wrong" });
 
     req.session.user = result.username;
-    res.send("Account created");
-    return res.json({ success: "Account created" });
+    res.send({ success: "Account created" });
   });
 });
 
